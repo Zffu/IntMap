@@ -17,6 +17,7 @@ public class IntMap<V> extends AbstractMap<Integer, V> implements Serializable, 
      */
     private static final Object[] DEFAULT_MAP = {};
 
+    private static final int DEFAULT_MAP_CAPACITY = 10;
     /**
      * The Map's values array.
      */
@@ -29,16 +30,25 @@ public class IntMap<V> extends AbstractMap<Integer, V> implements Serializable, 
 
     /**
      * Constructs an {@link IntMap} with a predefined capacity.
-     * @param maxKeyIndex the capacity (max key index).
+     * @param capacity the capacity (max key index).
      */
-    public IntMap(int maxKeyIndex) {
-        if(maxKeyIndex > 0) {
-            this.values = new Object[maxKeyIndex + 1];
+    public IntMap(int capacity) {
+        if(capacity > 0) {
+            this.values = new Object[capacity];
         }
         else {
             this.values = DEFAULT_MAP;
         }
     }
+
+    /**
+     * Constructs an {@link IntMap} with the default capacity.
+     */
+    public IntMap() {
+        this.values = new Object[DEFAULT_MAP_CAPACITY];
+    }
+
+
 
     /**
      * Returns the element located at the specified key index.
