@@ -2,9 +2,7 @@ package net.zffu.intmap;
 
 
 import java.io.Serializable;
-import java.util.AbstractMap;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>An {@link java.util.Map} that is using Integers as keys.</p>
@@ -118,6 +116,21 @@ public class IntMap<V> extends AbstractMap<Integer, V> implements Serializable, 
     @Override
     public int size() {
         return this.size;
+    }
+
+    /**
+     * Increases the capacity of the {@link IntMap}
+     * @param minCapacity the minimum capacity the {@link IntMap} must have.
+     */
+    private void ensureCapacity(int minCapacity) {
+        int oldCapacity = this.values.length;
+        if(minCapacity > oldCapacity) {
+            int newCapacity = (oldCapacity * 3) / 2 + 1;
+            if(newCapacity < minCapacity) {
+                newCapacity = minCapacity;
+            }
+            this.values = Arrays.copyOf(this.values, newCapacity);
+        }
     }
 
     @Override
